@@ -67,17 +67,29 @@
 	  VALUES(SEQ_TODO_NO.NEXTVAL, #{todoTitle}, #{todoContent}, DEFAULT, DEFAULT)
   </insert>
   
+  <!-- 할 일 상세 조회. -->
+  <select id="todoDetail" resultType="Todo" parameterType="_int">
+	SELECT TODO_NO, TODO_TITLE, TODO_CONTENT, COMPLETE,
+	 TO_CHAR(REG_DATE, 'YYYY-MM-DD HH24:MI:SS') REG_DATE FROM TB_TODO
+	WHERE TODO_NO = ${todoNo}
+  </select>
   
+  <!-- 할 일 완료 여부 변경. -->
+  <update id="changeComplete" parameterType="Todo">
+  	UPDATE TB_TODO SET
+  	COMPLETE = #{complete}
+  	WHERE TODO_NO = #{todoNo}
+  </update>  
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  <delete id="todoDelete">
+  	DELETE FROM TB_TODO
+  	WHERE TODO_NO = ${todoNo}
+  </delete>
+
+  <update id="todoUpdate2">
+  	UPDATE TB_TODO SET TODO_CONTENT = #{todoContent}
+  	, TODO_TITLE = #{todoTitle}
+  	WHERE TODO_NO = ${todoNo}
+  </update>
   
 </mapper>

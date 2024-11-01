@@ -68,8 +68,40 @@ public class ServiceImpl implements TodoService {
 		
 		return mapper.addTodo(todo);
 	}
+
+	// 할 일 상세 조회.
+	@Override
+	public Todo todoDetail(int todoNo) {
+
+		return mapper.todoDetail(todoNo);
+	}
+
+	// 할 일 완료 여부 변경.
+	@Override
+	public int changeComplete(Todo todo) {
+
+		return mapper.changeComplete(todo);
+	}
+
+	// 할 일 목록 삭제하기.
+	@Override
+	public int todoDelete(int todoNo) {
+
+		return mapper.todoDelete(todoNo);
+	}
 	
-	
+	// 할 일 제목, 상세내용 수정하기.
+	@Override
+	public int todoUpdate2(int todoNo, String todoTitle, String todoContent) {
+		
+		Todo todo = new Todo();
+		todo.setTodoNo(todoNo);
+		todo.setTodoTitle(todoTitle);
+		todo.setTodoContent(todoContent);
+		
+		return mapper.todoUpdate2(todo);
+	}
+
 	
 	
 }

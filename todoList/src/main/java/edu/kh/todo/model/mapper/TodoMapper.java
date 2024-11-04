@@ -76,7 +76,7 @@ public interface TodoMapper {
 	 */
 	int todoUpdate2(Todo todo);
 
-	
+	int getTotalCount();
 	
 	
 	

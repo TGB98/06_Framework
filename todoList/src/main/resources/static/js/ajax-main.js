@@ -452,32 +452,6 @@ updateBtn.addEventListener("click", e => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // js 파일에 함수 호출 코드 바로 작성 -> 페이지 로딩 시 바로 실행해 화면에 출력해야하기 때문.
 getToltalCount(); // 함수 호출.
 getCompleteCount();

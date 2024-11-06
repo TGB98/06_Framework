@@ -40,7 +40,7 @@ public interface TodoMapper {
 	 * @return completeCount
 	 */
 	int getCompleteCount();
-
+	
 	/**
 	 * 할 일 추가
 	 * @param todo

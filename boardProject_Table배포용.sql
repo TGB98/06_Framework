@@ -60,12 +60,22 @@ UPDATE "MEMBER"
 SET MEMBER_PW = '$2a$10$iQad5nALZpQZzjsFTXvV8uF4g5Sut25OQ28weq/8faHgY79OB0TYq'
 WHERE MEMBER_NO = 1;
 
+
+-- 로그인
 SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_PW,
 MEMBER_TEL, MEMBER_ADDRESS, PROFILE_IMG, AUTHORITY,
 TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') ENROLL_DATE
 FROM "MEMBER"
 WHERE MEMBER_EMAIL = 'user01@kh.or.kr'
 AND MEMBER_DEL_FL = 'N';
+
+
+-- 이메일 중복 검사
+SELECT COUNT(*) FROM "MEMBER"
+WHERE MEMBER_DEL_FL = 'N'
+AND MEMBER_EMAIL = 'user01@kh.or.kr';
+-- 0 조회 : 중복 X (해당 이메일 사용중인 회원이 없음) -> 이용 가능.
+-- 1 조회 : 중복 O (해당 이메일 사용중인 회원이 있음) -> 이용 불가능.
 
 -----------------------------------------
 

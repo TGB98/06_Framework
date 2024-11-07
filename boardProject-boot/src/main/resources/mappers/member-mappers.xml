@@ -6,7 +6,7 @@
   		메서드명과 같은 id를 가진 SQL이 수행됨.
    -->
   
-  <!-- 로그인 -->
+  <!-- 로그인 SQL -->
   <select id="login" resultType="Member">
   	SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_PW,
 	MEMBER_TEL, MEMBER_ADDRESS, PROFILE_IMG, AUTHORITY,
@@ -16,8 +16,12 @@
 	AND MEMBER_DEL_FL = 'N'
   </select>
   
-  
-  
+  <!-- 이메일 중복 검사 SQL -->
+  <select id="checkEmail" resultType="_int">
+  	SELECT COUNT(*) FROM "MEMBER"
+	WHERE MEMBER_DEL_FL = 'N'
+	AND MEMBER_EMAIL = #{memberEmail}
+  </select>
   
   
   

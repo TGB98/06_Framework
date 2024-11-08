@@ -55,6 +55,10 @@ COMMIT;
 
 SELECT * FROM "MEMBER";
 
+UPDATE "MEMBER"
+SET MEMBER_ADDRESS = NULL
+WHERE MEMBER_NO = 3;
+
 -- 회원 1번 유저일 암호화된 비밀번호 업데이트(pass01!)
 UPDATE "MEMBER"
 SET MEMBER_PW = '$2a$10$iQad5nALZpQZzjsFTXvV8uF4g5Sut25OQ28weq/8faHgY79OB0TYq'
@@ -79,6 +83,21 @@ AND MEMBER_EMAIL = 'user01@kh.or.kr';
 
 -----------------------------------------
 
+-- 닉네임 중복 검사
+SELECT COUNT(*) FROM "MEMBER"
+WHERE MEMBER_NICKNAME = '유저일'
+AND MEMBER_DEL_FL = 'N';
+
+-- 회원 정보 수정
+UPDATE "MEMBER"
+SET MEMBER_NICKNAME = 'USER2',
+MEMBER_TEL = '01055665566',
+MEMBER_ADDRESS = '04540^^^서울 중구 남대문로 120^^^3층,E강의장'
+WHERE MEMBER_EMAIL = 'user02@kh.or.kr';
+
+ROLLBACK;
+-----------------------------------------
+
 /* 이메일, 인증키 저장 테이블 생성 */
 CREATE TABLE "TB_AUTH_KEY"(
 	"KEY_NO"    NUMBER PRIMARY KEY,
@@ -96,7 +115,6 @@ CREATE SEQUENCE SEQ_KEY_NO NOCACHE; -- 인증키 구분 번호 시퀀스
 
 
 SELECT * FROM "TB_AUTH_KEY";
-
 
 ------------------------------------------
 

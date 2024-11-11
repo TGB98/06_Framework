@@ -95,7 +95,20 @@ MEMBER_TEL = '01055665566',
 MEMBER_ADDRESS = '04540^^^서울 중구 남대문로 120^^^3층,E강의장'
 WHERE MEMBER_EMAIL = 'user02@kh.or.kr';
 
+-- 회원 번호를 이용한 비밀번호 조회
+SELECT MEMBER_PW FROM "MEMBER"
+WHERE MEMBER_NO = ?;
+
+-- 새 비밀번호 DB 업데이트
+UPDATE "MEMBER" SET
+MEMBER_PW = ?
+WHERE MEMBER_NO = ?;
+
 ROLLBACK;
+
+-- 탈퇴한 회원 다시 복구
+UPDATE "MEMBER" SET MEMBER_DEL_FL = 'N'
+WHERE MEMBER_NO = 1;
 -----------------------------------------
 
 /* 이메일, 인증키 저장 테이블 생성 */

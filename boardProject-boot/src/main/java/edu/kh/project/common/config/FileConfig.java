@@ -37,6 +37,14 @@ public class FileConfig implements WebMvcConfigurer{
 	@Value("${spring.servlet.multipart.location}")
 	private String location; // C:/uploadFiles/temp/
 	
+	// ---------------------------------------------------
+	// 프로필 이미지 관련 경로.
+	@Value("${my.profile.resource-handler}")
+	private String profileResourceHandler; // /myPage/profile/**
+	
+	@Value("${my.profile.resource-location}")
+	private String profileResourceLocation; // file:///C:/uploadFiles/profile/
+	
 	
 	// 요청 주소에 따라
 	// 서버 컴퓨터의 어떤 경로에 접근할지 설정.
@@ -53,8 +61,10 @@ public class FileConfig implements WebMvcConfigurer{
 		// 클라이언트가 /myPage/file/** 패턴으로 이미지를 요청할 때
 		// 서버 폴더 경로 중 file:///C:/uploadFiles/test/ 로 연결하겠다
 
+		
+		registry.addResourceHandler(profileResourceHandler)
+		.addResourceLocations(profileResourceLocation);
 	}
-	
 	
 	
 	/* MultipartResolver 설정 */

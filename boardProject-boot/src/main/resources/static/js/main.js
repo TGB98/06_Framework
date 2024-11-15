@@ -88,3 +88,63 @@ if(loginForm != null) {
     }
   });
 }
+
+
+// 회원 목록 조회(비동기) 버튼
+const selectMemberListBtn = document.querySelector("#selectMemberList");
+const tbody = document.querySelector("#memberList");
+selectMemberListBtn.addEventListener("click", () => {
+
+  fetch("/main/selectMemberList")
+  .then(resp => resp.json())
+  .then(memberList => {
+    tbody.innerHTML = "";
+
+    for(let member of memberList) {
+      const tr = document.createElement("tr");
+
+      const arr = ['memberNo', 'memberEmail', 'memberNickname', 'memberDelFl'];
+
+      for(let key of arr) {
+        const td = document.createElement("td");
+
+        td.innerText = member[key];
+        tr.append(td);
+      }
+      tbody.append(tr);
+    }
+  })
+
+});
+
+
+
+// 특정 회원 번호 input
+const resetMemberNoInput = document.querySelector("#resetMemberNo");
+
+// 특정 회원 비밀번호 초기화 버튼
+const resetPwBtn = document.querySelector("#resetPw");
+
+resetPwBtn.addEventListener("click", () => {
+
+  fetch("/main/changePw")
+  .then(resp => resp.text())
+  .then(result => {
+    if(result > 0) {
+      alert("비밀번호가 초기화되었습니다.");
+    }
+    else {
+      alert("회원 번호를 입력해주세요.");
+    }
+  })
+});
+
+// 특정 회원 번호 탈퇴 복구 input
+const restorationMemberNoInput = document.querySelector("#restorationMemberNo");
+
+// 복구하기 버튼
+const restorationBtn = document.querySelector("#resotrationBtn");
+
+
+
+

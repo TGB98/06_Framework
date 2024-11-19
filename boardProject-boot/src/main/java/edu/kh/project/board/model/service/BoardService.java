@@ -30,6 +30,13 @@ public interface BoardService {
 	 * @return
 	 */
 	int boardLike(Map<String, Integer> map);
+
+	/** 조회 수 1 증가
+	 * @param boardNo
+	 * @return 
+	 */
+	int updateReadCount(int boardNo);
+	
 	
 	
 

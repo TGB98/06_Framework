@@ -12,7 +12,6 @@ public interface MainMapper {
 
 	List<Member> selectMemberList();
 
-	int changePw(Map<String, Object> map);
 
 
 

@@ -8,8 +8,6 @@ public interface MainService {
 
 	List<Member> selectMemberList();
 
-	int changePw(int resetMemberNo);
-
 
 	
 

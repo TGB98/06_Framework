@@ -119,32 +119,79 @@ selectMemberListBtn.addEventListener("click", () => {
 
 
 
-// 특정 회원 번호 input
-const resetMemberNoInput = document.querySelector("#resetMemberNo");
+// -------------------------------------------------------
 
-// 특정 회원 비밀번호 초기화 버튼
-const resetPwBtn = document.querySelector("#resetPw");
+/* 특정 회원 비밀번호 초기화 */
+const resetMemberNo = document.querySelector("#resetMemberNo");
+const resetPw = document.querySelector("#resetPw");
 
-resetPwBtn.addEventListener("click", () => {
+resetPw.addEventListener("click", () => {
 
-  fetch("/main/changePw")
-  .then(resp => resp.text())
-  .then(result => {
-    if(result > 0) {
-      alert("비밀번호가 초기화되었습니다.");
-    }
-    else {
-      alert("회원 번호를 입력해주세요.");
-    }
-  })
+	// 입력 받은 회원 번호 얻어오기
+	const inputNo = resetMemberNo.value;
+
+	if (inputNo.trim().length == 0) {
+		alert("회원 번호 입력해주세요");
+		return;
+	}
+
+	fetch("/member/resetPw", {
+		method: "PUT", // PUT : 수정 요청 방식
+		headers: { "Content-Type": "application/json" },
+		body: inputNo
+	})
+		.then(resp => resp.text())
+		.then(result => {
+			// result == 컨트롤러로부터 반환받아 TEXT 로 파싱한 값
+			// "1", "0"
+
+			if (result > 0) {
+				alert("초기화 성공!");
+
+			} else {
+				alert("해당 회원이 존재하지 않습니다 :-(");
+
+			}
+		});
 });
 
-// 특정 회원 번호 탈퇴 복구 input
-const restorationMemberNoInput = document.querySelector("#restorationMemberNo");
-
-// 복구하기 버튼
-const restorationBtn = document.querySelector("#resotrationBtn");
 
 
+// -------------------------------------------------------
+
+/* 특정 회원 탈퇴 복구 */
+const restorationBtn = document.querySelector("#restorationBtn");
+const restorationMemberNo = document.querySelector("#restorationMemberNo");
 
 
+restorationBtn.addEventListener("click", () => {
+	// 입력 받은 회원 번호 얻어오기
+	const inputNo = restorationMemberNo.value;
+
+	if (inputNo.trim().length == 0) {
+		alert("회원 번호 입력해주세요");
+		return;
+	}
+
+	fetch("/member/restoreMember", {
+		method: "PUT", // PUT : 수정 요청 방식
+		headers: { "Content-Type": "application/json" },
+		body: inputNo
+	})
+		.then(resp => resp.text())
+		.then(result => {
+			// result == 컨트롤러로부터 반환받아 TEXT 로 파싱한 값
+			// "1", "0"
+			
+			if (result > 0) {
+				alert("복구 성공!");
+
+			} else {
+				alert("해당 회원이 존재하지 않습니다 :-(");
+
+			}
+		});
+
+
+
+})

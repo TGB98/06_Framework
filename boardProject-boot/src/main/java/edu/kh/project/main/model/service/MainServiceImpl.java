@@ -27,22 +27,6 @@ public class MainServiceImpl implements MainService{
 		return mapper.selectMemberList();
 	}
 	
-	@Override
-	public int changePw(int resetMemberNo) {
-
-		String newPw = "pass01!";
-		
-		String encPw = bcrypt.encode(newPw);
-		
-		Map<String, Object> map = new HashMap<>();
-		
-		map.put("encPw", encPw);
-		map.put("resetMemberNo", resetMemberNo);
-		
-		int result = mapper.changePw(map);
-
-		return result;
-	}
 	
 	
 	

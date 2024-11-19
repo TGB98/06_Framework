@@ -1,5 +1,7 @@
 package edu.kh.project.member.model.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import edu.kh.project.member.model.dto.Member;
@@ -30,5 +32,9 @@ public interface MemberMapper {
 	 * @return result 삽입 성공한 행의 개수.
 	 */
 	int signup(Member inputMember);
+
+	int resetPw(Map<String, Object> map);
+
+	int restoreMember(int inputNo);
 
 }

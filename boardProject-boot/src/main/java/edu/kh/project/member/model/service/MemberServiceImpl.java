@@ -1,7 +1,9 @@
 package edu.kh.project.member.model.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -127,8 +129,23 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	
+	public int resetPw(int inputNo) {
+
+		String encPw = bcrypt.encode("pass01!");
+
+		Map<String, Object> map = new HashMap<>();
+
+		map.put("inputNo", inputNo);
+		map.put("encPw", encPw);
+
+		return mapper.resetPw(map);
+
+	}
 	
-	
+
+	public int restoreMember(int inputNo) {
+		return mapper.restoreMember(inputNo);
+	}
 	
 	
 	

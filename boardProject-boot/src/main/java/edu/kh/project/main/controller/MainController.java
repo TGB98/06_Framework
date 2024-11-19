@@ -51,14 +51,6 @@ public class MainController {
 		return memberList;
 	}
 	
-	@ResponseBody
-	@GetMapping("main/changePw")
-	public int changePw(@RequestParam("resetMemberNo") int resetMemberNo) {
-
-		int result = service.changePw(resetMemberNo);
-		
-		return result;
-	}
 	
 	
 	

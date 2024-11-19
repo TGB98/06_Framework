@@ -29,4 +29,8 @@ public interface MemberService {
 	 */
 	int signup(Member inputMember, String[] memberAddress);
 
+	int resetPw(int inputNo);
+
+	int restoreMember(int inputNo);
+
 }

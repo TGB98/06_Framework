@@ -7,13 +7,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.project.board.model.dto.Board;
 import edu.kh.project.board.model.dto.BoardImg;
 import edu.kh.project.board.model.service.BoardService;
+import edu.kh.project.member.model.dto.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -68,13 +73,19 @@ public class BoardController {
 	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}")
 	public String boardDetail(@PathVariable("boardCode") int boardCode,
 							  @PathVariable("boardNo") int boardNo, 
-							  Model model, RedirectAttributes ra) {
+							  Model model, RedirectAttributes ra,
+							  @SessionAttribute(value="loginMember", required = false) Member loginMember) {
 		
 		// 게시글 상세 조회 서비스 호출.
 		// 1. Map으로 전달할 파라미터 묶기.
 		Map<String, Integer> map = new HashMap<>();
 		map.put("boardCode", boardCode);
 		map.put("boardNo", boardNo);
+		
+		// 로그인 상태인 경우에만 memberNo 추가.
+		if(loginMember != null) {
+			map.put("memberNo", loginMember.getMemberNo());
+		}
 		
 		// 2. 서비스 호출.
 		Board board = service.selectOne(map);
@@ -118,5 +129,21 @@ public class BoardController {
 		
 		return path;
 	}
+	
+	/** 게시글 좋아요 체크/해제
+	 * @param map
+	 * @return count
+	 */
+	@ResponseBody
+	@PostMapping("like") // /board/like (POST)
+	public int boardLike(@RequestBody Map<String, Integer> map) {
+		
+		return service.boardLike(map);
+	}
+	
+	
+	
+	
+	
 	
 }

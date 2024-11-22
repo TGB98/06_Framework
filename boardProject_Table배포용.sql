@@ -109,6 +109,8 @@ ROLLBACK;
 -- 탈퇴한 회원 다시 복구
 UPDATE "MEMBER" SET MEMBER_DEL_FL = 'N'
 WHERE MEMBER_NO = 1;
+
+SELECT NEXT_IMG_NO() FROM DUAL;
 -----------------------------------------
 
 /* 이메일, 인증키 저장 테이블 생성 */
@@ -676,7 +678,7 @@ BEGIN
 END;
 -- 여기까지 긁기
 
-
+COMMIT;
 
 ----------------------------------------------------------
 /* 채팅 */

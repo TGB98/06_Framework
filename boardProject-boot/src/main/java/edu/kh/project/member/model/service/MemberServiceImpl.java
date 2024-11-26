@@ -28,7 +28,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	// 로그인 서비스.
 	@Override
-	public Member login(Member inputMember) {
+	public Member login(Member inputMember) throws Exception{
 		
 		// 암호화 진행
 		// 평문 : 암호화가 진행되지 않은 문장.

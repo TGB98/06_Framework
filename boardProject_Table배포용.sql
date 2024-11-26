@@ -168,6 +168,18 @@ JOIN "MEMBER" sub ON (main.MEMBER_NO = sub.MEMBER_NO)
 WHERE main.MEMBER_NO = 1
 ORDER BY FILE_NO DESC;
 
+SELECT SUBSTR(PROFILE_IMG, INSTR(PROFILE_IMG, '/', -1) + 1) "rename"
+FROM "MEMBER"
+WHERE PROFILE_IMG IS NOT NULL
+UNION
+SELECT CAST(IMG_RENAME AS VARCHAR2(300)) "rename"
+FROM "BOARD_IMG";
+
+-- SQL Error [12704] [72000]: ORA-12704문자 집합이 일치하지 않습니다
+-- MEMBER 테이블의 PROFILE_IMG(VARCHAR2(300))
+-- BOARD_IMG 테이블의 IMG_RENAME(NVARCHAR2(50))
+
+
 ------------------------------------------
 
 /* 게시판 테이블 생성 */
